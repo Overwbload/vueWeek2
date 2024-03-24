@@ -1,0 +1,5 @@
+- url 移到return裡頭
+- user資料移到return
+- html用V-MODEL綁定輸入的資料
+- products = item 用函式來呼叫
+- TOKEN在頁面載入時先取出
