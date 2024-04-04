@@ -22,11 +22,11 @@
         <div class="col-8">
           <form id="form" class="form-signin">
             <div class="form-floating mb-3">
-              <input type="email" class="form-control" id="username" placeholder="name@example.com" required autofocus>
+              <input type="email" class="form-control" v-model="user.username"    placeholder="name@example.com" required autofocus>
               <label for="username">Email address</label>
             </div>
             <div class="form-floating">
-              <input type="password" class="form-control" id="password" placeholder="Password" required>
+              <input type="password" class="form-control" v-model="user.password"    placeholder="Password" required>
               <label for="password">Password</label>
             </div>
             <button id="login" class="btn btn-lg btn-primary w-100 mt-3" v-on:click="getLogin" type="button">

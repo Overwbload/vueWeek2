@@ -54,23 +54,24 @@
 // ]
 
 const { createApp } = Vue;
-const url = 'https://vue3-course-api.hexschool.io/v2'; // 請加入站點
-const path = 'jasonfu-api-vuetest'; // 請加入個人 API Path
+// const url = 'https://vue3-course-api.hexschool.io/v2'; // 請加入站點
+// const path = 'jasonfu-api-vuetest'; // 請加入個人 API Path
 
 const app = createApp({
   data() {
     return {
-
+      url: 'https://vue3-course-api.hexschool.io/v2', // 請加入站點
+      path: 'jasonfu-api-vuetest',// 請加入個人 API Path
       tempProduct: {},
       products: []
     }
   },
   methods: {
     checkLoginToken() { //call登入驗證
-      var token = document.cookie.replace(/(?:(?:^|.*;\s*)jasonToken\s*\=\s*([^;]*).*$)|^.*$/, "$1",);
-      axios.defaults.headers.common['Authorization'] = token;
+      // var token = document.cookie.replace(/(?:(?:^|.*;\s*)jasonToken\s*\=\s*([^;]*).*$)|^.*$/, "$1",);
+      // axios.defaults.headers.common['Authorization'] = token;
 
-      axios.post(`${url}/api/user/check`)
+      axios.post(`${this.url}/api/user/check`)
         .then(res => {
           if (res.data.success) {
             alert('驗證成功');
@@ -84,7 +85,7 @@ const app = createApp({
         })
     },
     renderProducts() {  //get產品資訊
-      axios.get(`${url}/api/${path}/admin/products`)
+      axios.get(`${this.url}/api/${this.path}/admin/products`)
         .then(res => {
           this.products = res.data.products;
           console.log(res);
@@ -93,10 +94,15 @@ const app = createApp({
           alert(err.data.message)
           console.dir(err.data.message);
         })
-    }
+    },
+    checkDetail(item){
+      this.tempProduct = item;
+    },
 
   },
   mounted() {
+    var token = document.cookie.replace(/(?:(?:^|.*;\s*)jasonToken\s*\=\s*([^;]*).*$)|^.*$/, "$1",);
+    axios.defaults.headers.common['Authorization'] = token;
     this.checkLoginToken();
   }
 });
